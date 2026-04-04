@@ -13,6 +13,8 @@ const books = [
     { id: 8, title: "The Song of Achilles", author: "Madeline Miller", genre: "Mythology", rating: 4.9, year: 2011, available: true, borrows: "6.9k", cover: "https://covers.openlibrary.org/b/id/8739154-L.jpg", story: "a retelling of the iliad through the eyes of patroclus — his love and fate intertwined with the legendary achilles." },
 ]
 
+const categories = ["all", ...new Set(books.map(b => b.genre))];
+
 function BookCard({ b }) {
     const [hovered, setHovered] = useState(false)
 
@@ -107,10 +109,64 @@ function BookCard({ b }) {
 }
 
 export default function BooksPage() {
+
+    const [selectedCategory, setSelectedCategory] = useState("all");
+    const [sortOrder, setSortOrder] = useState("asc");
+    const [sortBy, setSortBy] = useState(["ascending", "descending", "rating", "borrows", "year"]);
+    const [currentSort, setCurrentSort] = useState("year");
+
+    const filteredBooks = selectedCategory === "all"
+        ? books
+        : books.filter(b => b.genre === selectedCategory);
+
+    filteredBooks.sort((a, b) => {
+        if (currentSort === "year") {
+            return b.year - a.year;
+        } else if (currentSort === "rating") {
+            return b.rating - a.rating;
+        } else if (currentSort === "borrows") {
+            return b.borrows - a.borrows;
+        } else if (currentSort === "ascending") {
+            return a.title.localeCompare(b.title);
+        } else if (currentSort === "descending") {
+            return b.title.localeCompare(a.title);
+        }
+    });
+
     return (
         <div className="max-w-6xl mx-auto px-6 py-12">
+            <div className="flex flex-wrap gap-2 mb-8">
+                <h2 className="text-xs font-semibold">Categories:</h2>
+                {categories.map(cat => (
+                    <button
+                        key={cat}
+                        onClick={() => setSelectedCategory(cat)}
+                        className={`px-4 py-2 rounded-full text-xs font-semibold capitalize border ${cat === selectedCategory
+                            ? "bg-black text-white border-black"
+                            : "border-gray-300 hover:border-black hover:text-black"
+                            }`}
+                    >
+                        {cat}
+                    </button>
+                ))}
+            </div>
+            <div className="flex gap-2 mb-8">
+                <h2 className="text-xs font-semibold">Sort by:</h2>
+                {sortBy?.map(sort => (
+                    <button
+                        key={sort}
+                        onClick={() => setCurrentSort(sort)}
+                        className={`px-4 py-2 rounded-full text-xs font-semibold capitalize border ${sort === currentSort
+                            ? "bg-black text-white border-black"
+                            : "border-gray-300 hover:border-black hover:text-black"
+                            }`}
+                    >
+                        {sort}
+                    </button>
+                ))}
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-                {books.map((b, i) => (
+                {filteredBooks.map((b, i) => (
                     <motion.div
                         key={b.id}
                         initial={{ opacity: 0, y: 30 }}
