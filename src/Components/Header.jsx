@@ -69,12 +69,12 @@ export default function Header() {
             setOpen(false)
             navigate("/")
         } catch (error) {
-            console.error(error)
+            console.error("Logout error:", error)
         }
     }
 
     return (
-        <header className="bg-white border-b border-b-gray-300 border-black sticky top-0 z-50">
+        <header className="bg-white border-b border-gray-300 sticky top-0 z-50">
             <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
 
                 <Link to="/" className="flex items-center gap-2 text-black font-bold text-2xl">
@@ -84,8 +84,10 @@ export default function Header() {
 
                 <ul className="hidden md:flex items-center gap-10">
                     {links.map(l => (
-                        <li key={l}>
-                            <a href={l.path} className="text-black text-sm font-semibold border-b-2 border-transparent pb-1">{l.name}</a>
+                        <li key={l.path}>
+                            <Link to={l.path} className="text-black text-sm font-semibold border-b-2 border-transparent pb-1 hover:border-black transition-all">
+                                {l.name}
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -126,8 +128,10 @@ export default function Header() {
                 <div className="md:hidden bg-white border-t-2 border-black px-6 py-6">
                     <ul className="flex flex-col gap-5">
                         {links.map(l => (
-                            <li key={l} className="border-b border-black pb-3">
-                                <a href="#" className="text-black text-base font-semibold">{l}</a>
+                            <li key={l.path} className="border-b border-black pb-3">
+                                <Link to={l.path} onClick={() => setOpen(false)} className="text-black text-base font-semibold block">
+                                    {l.name}
+                                </Link>
                             </li>
                         ))}
                     </ul>

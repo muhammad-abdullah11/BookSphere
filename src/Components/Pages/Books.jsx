@@ -1,6 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { FaStar, FaBookOpen, FaArrowRight, FaPlus } from "react-icons/fa"
+import { FaStar, FaBookOpen, FaArrowRight, FaPlus, FaCheck } from "react-icons/fa"
+import { supabase } from "../../supabase"
+import { useNavigate } from "react-router-dom"
 
 const books = [
     { id: 1, title: "The Midnight Library", author: "Matt Haig", genre: "Fiction", rating: 4.8, year: 2020, available: true, borrows: "11.2k", cover: "https://covers.openlibrary.org/b/id/10909258-L.jpg", story: "between life and death there is a library. nora seed discovers a place where every book represents a life she could have lived." },
@@ -15,8 +17,20 @@ const books = [
 
 const categories = ["all", ...new Set(books.map(b => b.genre))];
 
-function BookCard({ b }) {
+function BookCard({ b, userProfile, onBorrow }) {
     const [hovered, setHovered] = useState(false)
+    const [borrowing, setBorrowing] = useState(false)
+
+    const isBorrowed = userProfile?.borrowed_books?.some(item => item.id === b.id)
+
+    const handleBorrowClick = async (e) => {
+        e.stopPropagation()
+        if (isBorrowed || !b.available) return
+
+        setBorrowing(true)
+        await onBorrow(b)
+        setBorrowing(false)
+    }
 
     return (
         <motion.article
@@ -42,7 +56,7 @@ function BookCard({ b }) {
 
                 {!b.available && (
                     <div className="absolute top-3 right-3 z-10">
-                        <span className="bg-white border border-gray-300 rounded-full px-3 py-1 text-xs font-semibold">borrowed</span>
+                        <span className="bg-white border border-gray-300 rounded-full px-3 py-1 text-xs font-semibold">unavailable</span>
                     </div>
                 )}
 
@@ -72,10 +86,17 @@ function BookCard({ b }) {
                                 transition={{ delay: 0.15, duration: 0.3 }}
                             >
                                 <button
-                                    disabled={!b.available}
-                                    className={`flex-1 bg-black text-white rounded-full py-2 text-xs font-semibold flex items-center justify-center gap-1 ${!b.available ? "opacity-40 cursor-not-allowed" : ""}`}
+                                    onClick={handleBorrowClick}
+                                    disabled={!b.available || borrowing || isBorrowed}
+                                    className={`flex-1 ${isBorrowed ? "bg-green-600 text-white" : "bg-black text-white"} rounded-full py-2 text-xs font-semibold flex items-center justify-center gap-1 disabled:opacity-40 transition-colors`}
                                 >
-                                    {b.available ? "borrow now" : "waitlist"} <FaArrowRight size={10} />
+                                    {isBorrowed ? (
+                                        <><FaCheck size={10} /> borrowed</>
+                                    ) : borrowing ? (
+                                        "borrowing..."
+                                    ) : (
+                                        <>{b.available ? "borrow now" : "waitlist"} <FaArrowRight size={10} /></>
+                                    )}
                                 </button>
                                 <button className="flex-1 border border-gray-300 rounded-full py-2 text-xs font-semibold flex items-center justify-center gap-1">
                                     read more <FaPlus size={10} />
@@ -109,28 +130,70 @@ function BookCard({ b }) {
 }
 
 export default function BooksPage() {
-
     const [selectedCategory, setSelectedCategory] = useState("all");
-    const [sortOrder, setSortOrder] = useState("asc");
-    const [sortBy, setSortBy] = useState(["ascending", "descending", "rating", "borrows", "year"]);
     const [currentSort, setCurrentSort] = useState("year");
+    const [user, setUser] = useState(null)
+    const [profile, setProfile] = useState(null)
+    const navigate = useNavigate()
+
+    const sortBy = ["ascending", "descending", "rating", "borrows", "year"];
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const { data } = await supabase.auth.getUser()
+            if (data?.user) {
+                setUser(data.user)
+                const { data: profileData } = await supabase
+                    .from('User')
+                    .select('*')
+                    .eq('id', data.user.id)
+                    .single()
+                if (profileData) setProfile(profileData)
+            }
+        }
+        fetchUser()
+    }, [])
+
+    const handleBorrow = async (book) => {
+        if (!user) {
+            alert("Please login to borrow books!")
+            navigate("/login")
+            return
+        }
+
+        const currentBorrows = profile?.borrowed_books || []
+        const newBorrows = [...currentBorrows, {
+            id: book.id,
+            title: book.title,
+            cover: book.cover,
+            author: book.author,
+            borrowedAt: new Date().toISOString()
+        }]
+
+        const { error } = await supabase
+            .from('User')
+            .update({ borrowed_books: newBorrows })
+            .eq('id', user.id)
+
+        if (error) {
+            console.error("Borrow error:", error)
+            alert("Failed to borrow book. Make sure you've added the 'borrowed_books' column to your 'User' table in Supabase.")
+        } else {
+            setProfile({ ...profile, borrowed_books: newBorrows })
+        }
+    }
 
     const filteredBooks = selectedCategory === "all"
-        ? books
+        ? [...books]
         : books.filter(b => b.genre === selectedCategory);
 
     filteredBooks.sort((a, b) => {
-        if (currentSort === "year") {
-            return b.year - a.year;
-        } else if (currentSort === "rating") {
-            return b.rating - a.rating;
-        } else if (currentSort === "borrows") {
-            return b.borrows - a.borrows;
-        } else if (currentSort === "ascending") {
-            return a.title.localeCompare(b.title);
-        } else if (currentSort === "descending") {
-            return b.title.localeCompare(a.title);
-        }
+        if (currentSort === "year") return b.year - a.year;
+        if (currentSort === "rating") return b.rating - a.rating;
+        if (currentSort === "borrows") return parseFloat(b.borrows) - parseFloat(a.borrows);
+        if (currentSort === "ascending") return a.title.localeCompare(b.title);
+        if (currentSort === "descending") return b.title.localeCompare(a.title);
+        return 0;
     });
 
     return (
@@ -173,7 +236,11 @@ export default function BooksPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.07, duration: 0.4, ease: "easeOut" }}
                     >
-                        <BookCard b={b} />
+                        <BookCard
+                            b={b}
+                            userProfile={profile}
+                            onBorrow={handleBorrow}
+                        />
                     </motion.div>
                 ))}
             </div>
