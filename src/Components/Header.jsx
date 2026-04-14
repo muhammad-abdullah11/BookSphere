@@ -3,7 +3,7 @@ import { FaBookOpen, FaBars, FaTimes, FaUser } from "react-icons/fa"
 import { supabase } from "../supabase"
 import { Link, useNavigate } from "react-router-dom"
 
-const links = [{ name: "Home", path: "/" }, { name: "Books", path: "/books" }, { name: "My Borrows", path: "/m-borrows" }, { name: "Contact Us", path: "/contact" }]
+const links = [{ name: "Home", path: "/" }, { name: "Books", path: "/books" }, { name: "Contact Us", path: "/contact" }]
 
 export default function Header() {
     const [open, setOpen] = useState(false)
