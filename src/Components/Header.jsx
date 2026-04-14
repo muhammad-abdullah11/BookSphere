@@ -1,71 +1,18 @@
 import { useState, useEffect } from "react"
 import { FaBookOpen, FaBars, FaTimes, FaUser } from "react-icons/fa"
-import { supabase } from "../supabase"
+import { useAuth } from "../Contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 
 const links = [{ name: "Home", path: "/" }, { name: "Books", path: "/books" }, { name: "Contact Us", path: "/contact" }]
 
 export default function Header() {
     const [open, setOpen] = useState(false)
-    const [user, setUser] = useState(null)
-    const [profile, setProfile] = useState(null)
+    const { user, logout } = useAuth()
     const navigate = useNavigate()
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const { data } = await supabase.auth.getUser()
-            setUser(data?.user)
-            if (data?.user) {
-                const { data: profileData } = await supabase.from('User').select('*').eq('id', data.user.id).single()
-                if (profileData) {
-                    setProfile(profileData)
-                } else {
-                    const newProfile = {
-                        id: data.user.id,
-                        fullName: data.user.user_metadata?.full_name || data.user.email.split('@')[0],
-                        gmail: data.user.email,
-                        role: 'user',
-                        avatar_url: data.user.user_metadata?.avatar_url || ''
-                    }
-                    await supabase.from('User').insert([newProfile])
-                    setProfile(newProfile)
-                }
-            }
-        }
-        fetchUser()
-
-        const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-            if (event === 'SIGNED_OUT') {
-                setUser(null)
-                setProfile(null)
-            } else if (session?.user) {
-                const currentUser = session.user
-                setUser(currentUser)
-                const { data: profileData } = await supabase.from('User').select('*').eq('id', currentUser.id).single()
-                if (profileData) {
-                    setProfile(profileData)
-                } else {
-                    const newProfile = {
-                        id: currentUser.id,
-                        fullName: currentUser.user_metadata?.full_name || currentUser.email.split('@')[0],
-                        gmail: currentUser.email,
-                        role: 'user',
-                        avatar_url: currentUser.user_metadata?.avatar_url || ''
-                    }
-                    await supabase.from('User').insert([newProfile])
-                    setProfile(newProfile)
-                }
-            }
-        })
-
-        return () => authListener.subscription.unsubscribe()
-    }, [])
 
     const handleLogout = async () => {
         try {
-            await supabase.auth.signOut()
-            setUser(null)
-            setProfile(null)
+            await logout()
             setOpen(false)
             navigate("/")
         } catch (error) {
@@ -96,12 +43,8 @@ export default function Header() {
                     {user ? (
                         <div className="flex items-center gap-4">
                             <div className="flex items-center gap-2 border border-gray-300 rounded-full px-3 py-1">
-                                {profile?.avatar_url ? (
-                                    <img src={profile.avatar_url} alt={profile.fullName} className="w-6 h-6 rounded-full" />
-                                ) : (
-                                    <FaUser size={14} />
-                                )}
-                                <span className="text-xs font-semibold">{profile?.fullName || user.email}</span>
+                                <FaUser size={14} />
+                                <span className="text-xs font-semibold">{user.email}</span>
                             </div>
                             <button onClick={handleLogout} className="bg-black text-white text-sm font-semibold px-6 py-2 rounded-full">
                                 Logout

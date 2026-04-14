@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { FaStar, FaBookOpen, FaArrowRight, FaPlus, FaCheck } from "react-icons/fa"
-import { supabase } from "../../supabase"
+import { useAuth } from "../../Contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 
 const books = [
@@ -17,11 +17,11 @@ const books = [
 
 const categories = ["all", ...new Set(books.map(b => b.genre))];
 
-function BookCard({ b, userProfile, onBorrow }) {
+function BookCard({ b, user, onBorrow }) {
     const [hovered, setHovered] = useState(false)
     const [borrowing, setBorrowing] = useState(false)
 
-    const isBorrowed = userProfile?.borrowed_books?.some(item => item.id === b.id)
+    const isBorrowed = false 
 
     const handleBorrowClick = async (e) => {
         e.stopPropagation()
@@ -132,54 +132,16 @@ function BookCard({ b, userProfile, onBorrow }) {
 export default function BooksPage() {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [currentSort, setCurrentSort] = useState("year");
-    const [user, setUser] = useState(null)
-    const [profile, setProfile] = useState(null)
+    const { user } = useAuth()
     const navigate = useNavigate()
 
     const sortBy = ["ascending", "descending", "rating", "borrows", "year"];
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const { data } = await supabase.auth.getUser()
-            if (data?.user) {
-                setUser(data.user)
-                const { data: profileData } = await supabase
-                    .from('User')
-                    .select('*')
-                    .eq('id', data.user.id)
-                    .single()
-                if (profileData) setProfile(profileData)
-            }
-        }
-        fetchUser()
-    }, [])
 
     const handleBorrow = async (book) => {
         if (!user) {
             alert("Please login to borrow books!")
             navigate("/login")
             return
-        }
-
-        const currentBorrows = profile?.borrowed_books || []
-        const newBorrows = [...currentBorrows, {
-            id: book.id,
-            title: book.title,
-            cover: book.cover,
-            author: book.author,
-            borrowedAt: new Date().toISOString()
-        }]
-
-        const { error } = await supabase
-            .from('User')
-            .update({ borrowed_books: newBorrows })
-            .eq('id', user.id)
-
-        if (error) {
-            console.error("Borrow error:", error)
-            alert("Failed to borrow book. Make sure you've added the 'borrowed_books' column to your 'User' table in Supabase.")
-        } else {
-            setProfile({ ...profile, borrowed_books: newBorrows })
         }
     }
 
@@ -238,7 +200,7 @@ export default function BooksPage() {
                     >
                         <BookCard
                             b={b}
-                            userProfile={profile}
+                            user={user}
                             onBorrow={handleBorrow}
                         />
                     </motion.div>
