@@ -32,7 +32,7 @@ export default function Header() {
         <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
             <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
                 
-                <Link to="/" className="flex items-center gap-2 text-indigo-600 font-black text-2xl tracking-tighter">
+                <Link to="/" className="flex items-center gap-2 text-brand-600 font-black text-2xl tracking-tighter">
                     <FaBookOpen size={28} />
                     <span>BookSphere</span>
                 </Link>
@@ -40,7 +40,7 @@ export default function Header() {
                 <ul className="hidden md:flex items-center gap-8">
                     {links.map(l => (
                         <li key={l.path}>
-                            <Link to={l.path} className="text-gray-600 text-sm font-semibold hover:text-indigo-600 transition-colors">
+                            <Link to={l.path} className="text-gray-600 text-sm font-semibold hover:text-brand-600 transition-colors">
                                 {l.name}
                             </Link>
                         </li>
@@ -48,10 +48,10 @@ export default function Header() {
                 </ul>
 
                 <div className="hidden md:flex items-center gap-6">
-                    <div className="relative cursor-pointer text-gray-600 hover:text-indigo-600 transition-colors">
+                    <div className="relative cursor-pointer text-gray-600 hover:text-brand-600 transition-colors">
                         <FaShoppingCart size={20} />
                         {cartCount > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-indigo-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                            <span className="absolute -top-2 -right-2 bg-brand-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                                 {cartCount}
                             </span>
                         )}
@@ -69,10 +69,10 @@ export default function Header() {
                         </div>
                     ) : (
                         <div className="flex items-center gap-3">
-                            <Link to="/login" className="text-sm font-bold text-gray-600 hover:text-indigo-600 px-4 py-2">
+                            <Link to="/login" className="text-sm font-bold text-gray-600 hover:text-brand-600 px-4 py-2">
                                 Login
                             </Link>
-                            <Link to="/signup" className="bg-indigo-600 text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-100">
+                            <Link to="/signup" className="bg-brand-600 text-white text-sm font-bold px-6 py-2.5 rounded-full hover:bg-brand-700 transition-colors shadow-lg shadow-brand-100">
                                 Join
                             </Link>
                         </div>
@@ -83,7 +83,7 @@ export default function Header() {
                     <div className="relative text-gray-600">
                         <FaShoppingCart size={20} />
                         {cartCount > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-indigo-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                            <span className="absolute -top-2 -right-2 bg-brand-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                                 {cartCount}
                             </span>
                         )}
@@ -104,7 +104,7 @@ export default function Header() {
                         className="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl z-[60] p-8 md:hidden"
                     >
                         <div className="flex justify-between items-center mb-12">
-                            <span className="text-indigo-600 font-black text-2xl tracking-tighter flex items-center gap-2">
+                            <span className="text-brand-600 font-black text-2xl tracking-tighter flex items-center gap-2">
                                 <FaBookOpen size={24} /> BookSphere
                             </span>
                             <button onClick={() => setOpen(false)} className="text-gray-600"><FaTimes size={24} /></button>
@@ -132,7 +132,7 @@ export default function Header() {
                             ) : (
                                 <>
                                     <Link to="/login" onClick={() => setOpen(false)} className="w-full bg-gray-50 text-gray-900 text-center font-bold py-4 rounded-2xl block">Login</Link>
-                                    <Link to="/signup" onClick={() => setOpen(false)} className="w-full bg-indigo-600 text-white text-center font-bold py-4 rounded-2xl block shadow-lg shadow-indigo-100">Sign Up</Link>
+                                    <Link to="/signup" onClick={() => setOpen(false)} className="w-full bg-brand-600 text-white text-center font-bold py-4 rounded-2xl block shadow-lg shadow-brand-100">Sign Up</Link>
                                 </>
                             )}
                         </div>

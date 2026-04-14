@@ -37,7 +37,7 @@ const SignUp = () => {
               <p className="font-bold">Account created successfully!</p>
               <p className="text-sm mt-1">Check your email to confirm your account.</p>
             </div>
-            <Link to="/login" className="text-indigo-600 font-bold hover:underline">
+            <Link to="/login" className="text-brand-600 font-bold hover:underline">
               Go to Login
             </Link>
           </div>
@@ -49,7 +49,7 @@ const SignUp = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none transition-all"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-600 focus:border-brand-600 outline-none transition-all"
                 placeholder="you@example.com"
                 required
               />
@@ -60,7 +60,7 @@ const SignUp = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 outline-none transition-all"
+                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand-600 focus:border-brand-600 outline-none transition-all"
                 placeholder="••••••••"
                 required
               />
@@ -71,7 +71,7 @@ const SignUp = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 text-white rounded-xl py-3 text-sm font-bold hover:bg-indigo-700 transition-colors disabled:opacity-50"
+              className="w-full bg-brand-600 text-white rounded-xl py-3 text-sm font-bold hover:bg-brand-700 transition-colors disabled:opacity-50"
             >
               {loading ? 'Creating Account...' : 'Sign Up'}
             </button>
@@ -81,7 +81,7 @@ const SignUp = () => {
         {!success && (
           <p className="text-center text-sm mt-8 text-gray-600">
             Already have an account?{' '}
-            <Link to="/login" className="text-indigo-600 font-bold hover:underline">
+            <Link to="/login" className="text-brand-600 font-bold hover:underline">
               Log in
             </Link>
           </p>

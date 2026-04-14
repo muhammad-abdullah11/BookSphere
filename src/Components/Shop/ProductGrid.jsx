@@ -39,11 +39,11 @@ export default function ProductGrid({ activeCategory, activeSort }) {
               animate={{ opacity: 1 }}
               className="group"
             >
-              <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 bg-gray-50 border border-gray-100 shadow-sm group-hover:shadow-2xl group-hover:shadow-indigo-100 transition-all duration-500">
+              <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 bg-gray-50 border border-gray-100 shadow-sm group-hover:shadow-2xl group-hover:shadow-brand-100 transition-all duration-500">
                 <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 
                 {p.badge && (
-                  <div className="absolute top-4 left-4 bg-indigo-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
+                  <div className="absolute top-4 left-4 bg-brand-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
                     {p.badge}
                   </div>
                 )}
@@ -52,17 +52,17 @@ export default function ProductGrid({ activeCategory, activeSort }) {
                 
                 <button 
                   onClick={addToCart}
-                  className="absolute bottom-6 right-6 w-14 h-14 bg-white text-gray-900 rounded-2xl flex items-center justify-center shadow-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 hover:bg-indigo-600 hover:text-white"
+                  className="absolute bottom-6 right-6 w-14 h-14 bg-white text-gray-900 rounded-2xl flex items-center justify-center shadow-xl translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 hover:bg-brand-600 hover:text-white"
                 >
                   <FaPlus />
                 </button>
               </div>
 
               <div className="px-2">
-                <div className="flex items-center gap-2 text-[10px] font-black uppercase text-indigo-600 tracking-widest mb-1">
+                <div className="flex items-center gap-2 text-[10px] font-black uppercase text-brand-600 tracking-widest mb-1">
                   <FaTag size={8} /> {p.type}
                 </div>
-                <h3 className="text-gray-900 font-bold text-lg mb-2 group-hover:text-indigo-600 transition-colors truncate">{p.name}</h3>
+                <h3 className="text-gray-900 font-bold text-lg mb-2 group-hover:text-brand-600 transition-colors truncate">{p.name}</h3>
                 <div className="text-2xl font-black text-gray-900 leading-none">
                     €{p.price}
                 </div>

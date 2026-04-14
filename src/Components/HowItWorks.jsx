@@ -33,12 +33,12 @@ export default function HowItWorks() {
             const Icon = step.icon
             return (
               <div key={i} className="flex flex-col items-center relative z-10">
-                <div className="w-20 h-20 bg-white border-4 border-indigo-600 rounded-full flex items-center justify-center text-indigo-600 mb-8 shadow-xl shadow-indigo-100">
+                <div className="w-20 h-20 bg-white border-4 border-brand-600 rounded-full flex items-center justify-center text-brand-600 mb-8 shadow-xl shadow-brand-100">
                   <Icon size={30} />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4 tracking-tight uppercase">{step.title}</h3>
                 <p className="text-gray-500 max-w-xs">{step.desc}</p>
-                <div className="mt-4 text-xs font-black text-indigo-600/20 text-6xl select-none">0{i+1}</div>
+                <div className="mt-4 text-xs font-black text-brand-600/20 text-6xl select-none">0{i+1}</div>
               </div>
             )
           })}

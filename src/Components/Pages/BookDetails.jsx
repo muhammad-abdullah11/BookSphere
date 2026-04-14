@@ -27,7 +27,7 @@ export default function BookDetails() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
       </div>
     )
   }
@@ -47,7 +47,7 @@ export default function BookDetails() {
       <div className="max-w-7xl mx-auto">
         <button 
           onClick={() => navigate('/books')}
-          className="flex items-center gap-2 text-indigo-600 font-bold mb-12 hover:gap-4 transition-all"
+          className="flex items-center gap-2 text-brand-600 font-bold mb-12 hover:gap-4 transition-all"
         >
           <FaArrowLeft /> Back to Books
         </button>
@@ -58,7 +58,7 @@ export default function BookDetails() {
             animate={{ opacity: 1, x: 0 }}
             className="flex-shrink-0 w-full lg:w-[450px]"
           >
-            <div className="rounded-[3rem] overflow-hidden shadow-2xl shadow-indigo-100 border border-gray-100">
+            <div className="rounded-[3rem] overflow-hidden shadow-2xl shadow-brand-100 border border-gray-100">
               <img src={coverUrl} alt={book.title} className="w-full h-full object-cover" />
             </div>
           </motion.div>
@@ -74,7 +74,7 @@ export default function BookDetails() {
             
             <div className="flex flex-wrap gap-8 mb-12">
               <div className="flex items-center gap-3">
-                <div className="bg-indigo-50 p-3 rounded-2xl text-indigo-600"><FaCalendarAlt /></div>
+                <div className="bg-brand-50 p-3 rounded-2xl text-brand-600"><FaCalendarAlt /></div>
                 <div>
                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">Published</p>
                   <p className="font-bold text-gray-900">{book.first_publish_date || 'N/A'}</p>

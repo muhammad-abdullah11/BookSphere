@@ -6,7 +6,7 @@ export default function BookGrid({ books, loading }) {
   if (loading && books.length === 0) {
     return (
       <div className="flex justify-center py-20">
-        <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
       </div>
     )
   }
@@ -38,7 +38,7 @@ export default function BookGrid({ books, loading }) {
                 transition={{ delay: (i % 8) * 0.05 }}
                 className="group"
               >
-                <div className="relative aspect-[2/3] rounded-[2rem] overflow-hidden mb-6 shadow-sm border border-gray-100 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-indigo-100">
+                <div className="relative aspect-[2/3] rounded-[2rem] overflow-hidden mb-6 shadow-sm border border-gray-100 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-brand-100">
                   <img 
                     src={coverUrl} 
                     alt={book.title}
@@ -56,11 +56,11 @@ export default function BookGrid({ books, loading }) {
                 </div>
                 
                 <div className="px-2">
-                  <h3 className="text-lg font-bold text-gray-900 truncate mb-1 group-hover:text-indigo-600 transition-colors uppercase tracking-tight">
+                  <h3 className="text-lg font-bold text-gray-900 truncate mb-1 group-hover:text-brand-600 transition-colors uppercase tracking-tight">
                     {book.title}
                   </h3>
                   <p className="text-sm font-medium text-gray-400 mb-1 truncate">{book.author_name?.[0] || 'Unknown Author'}</p>
-                  <p className="text-xs font-black text-indigo-600 uppercase tracking-widest">{book.first_publish_year}</p>
+                  <p className="text-xs font-black text-brand-600 uppercase tracking-widest">{book.first_publish_year}</p>
                 </div>
               </motion.div>
             )

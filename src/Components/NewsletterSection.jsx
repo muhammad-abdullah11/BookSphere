@@ -16,12 +16,12 @@ export default function NewsletterSection() {
   }
 
   return (
-    <section className="py-24 bg-indigo-600 text-white overflow-hidden relative">
+    <section className="py-24 bg-brand-600 text-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="text-center md:text-left">
             <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter">Stay in the Loop</h2>
-            <p className="text-indigo-100 text-lg font-medium max-w-md">Subscribe to get monthly book recommendations, exclusive shop discounts, and library updates.</p>
+            <p className="text-brand-100 text-lg font-medium max-w-md">Subscribe to get monthly book recommendations, exclusive shop discounts, and library updates.</p>
           </div>
 
           <div className="w-full max-w-md relative">
@@ -51,12 +51,12 @@ export default function NewsletterSection() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full bg-white text-gray-900 rounded-full px-8 py-5 text-lg font-bold outline-none focus:ring-4 focus:ring-indigo-400 transition-all placeholder:text-gray-400"
+                    className="w-full bg-white text-gray-900 rounded-full px-8 py-5 text-lg font-bold outline-none focus:ring-4 focus:ring-brand-400 transition-all placeholder:text-gray-400"
                     required
                   />
                   <button 
                     type="submit"
-                    className="absolute right-2 top-2 bottom-2 bg-indigo-600 hover:bg-indigo-700 text-white px-8 rounded-full font-bold flex items-center gap-2 transition-all"
+                    className="absolute right-2 top-2 bottom-2 bg-brand-600 hover:bg-brand-700 text-white px-8 rounded-full font-bold flex items-center gap-2 transition-all"
                   >
                     Join <FaPaperPlane size={14} />
                   </button>

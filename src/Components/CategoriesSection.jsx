@@ -31,9 +31,9 @@ export default function CategoriesSection() {
                 whileHover={{ y: -5, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate(`/books?category=${genre.name}`)}
-                className="group flex flex-col items-center gap-4 bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-indigo-100 hover:border-indigo-100 transition-all min-w-[160px]"
+                className="group flex flex-col items-center gap-4 bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-brand-100 hover:border-brand-100 transition-all min-w-[160px]"
               >
-                <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 group-hover:bg-brand-600 group-hover:text-white transition-all">
                   <Icon size={24} />
                 </div>
                 <span className="font-extrabold text-gray-900 tracking-tight">{genre.name}</span>

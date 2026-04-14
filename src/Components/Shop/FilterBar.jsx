@@ -19,7 +19,7 @@ export default function FilterBar({ activeCategory, setActiveCategory, activeSor
               onClick={() => setActiveCategory(cat)}
               className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${
                 activeCategory === cat
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-100'
+                  ? 'bg-brand-600 text-white shadow-lg shadow-brand-100'
                   : 'bg-gray-50 text-gray-500 hover:bg-gray-100'
               }`}
             >
@@ -33,7 +33,7 @@ export default function FilterBar({ activeCategory, setActiveCategory, activeSor
           <select 
             value={activeSort}
             onChange={(e) => setActiveSort(e.target.value)}
-            className="bg-gray-50 border border-transparent rounded-xl px-4 py-2.5 text-sm font-bold text-gray-900 outline-none focus:border-indigo-600 transition-all cursor-pointer"
+            className="bg-gray-50 border border-transparent rounded-xl px-4 py-2.5 text-sm font-bold text-gray-900 outline-none focus:border-brand-600 transition-all cursor-pointer"
           >
             {sortOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>

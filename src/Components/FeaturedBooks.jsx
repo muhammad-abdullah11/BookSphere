@@ -19,9 +19,9 @@ export default function FeaturedBooks() {
         <div className="flex justify-between items-end mb-12">
           <div>
             <h2 className="text-4xl font-black text-gray-900 mb-4">Featured This Week</h2>
-            <div className="w-20 h-1.5 bg-indigo-600 rounded-full"></div>
+            <div className="w-20 h-1.5 bg-brand-600 rounded-full"></div>
           </div>
-          <Link to="/books" className="hidden md:flex items-center gap-2 text-indigo-600 font-bold hover:gap-3 transition-all">
+          <Link to="/books" className="hidden md:flex items-center gap-2 text-brand-600 font-bold hover:gap-3 transition-all">
             View All Collection <FaArrowRight size={14} />
           </Link>
         </div>
@@ -33,7 +33,7 @@ export default function FeaturedBooks() {
               whileHover={{ y: -10 }}
               className="group cursor-pointer"
             >
-              <div className="relative aspect-[2/3] rounded-2xl overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl group-hover:shadow-indigo-100 transition-all border border-gray-100">
+              <div className="relative aspect-[2/3] rounded-2xl overflow-hidden mb-6 shadow-sm group-hover:shadow-2xl group-hover:shadow-brand-100 transition-all border border-gray-100">
                 <img 
                   src={book.cover} 
                   alt={book.title}
@@ -48,7 +48,7 @@ export default function FeaturedBooks() {
                   </Link>
                 </div>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-1 truncate group-hover:text-indigo-600 transition-colors uppercase tracking-tight">
+              <h3 className="text-lg font-bold text-gray-900 mb-1 truncate group-hover:text-brand-600 transition-colors uppercase tracking-tight">
                 {book.title}
               </h3>
               <p className="text-sm text-gray-500 font-medium">{book.author}</p>
@@ -57,7 +57,7 @@ export default function FeaturedBooks() {
         </div>
         
         <div className="mt-12 md:hidden">
-            <Link to="/books" className="flex items-center justify-center gap-2 text-indigo-600 font-bold py-4 border border-indigo-100 rounded-2xl">
+            <Link to="/books" className="flex items-center justify-center gap-2 text-brand-600 font-bold py-4 border border-brand-100 rounded-2xl">
                 Browse More Books <FaArrowRight size={14} />
             </Link>
         </div>

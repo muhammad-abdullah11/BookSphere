@@ -46,7 +46,7 @@ export default function StatsBar() {
   ]
 
   return (
-    <section className="bg-indigo-600 text-white py-12">
+    <section className="bg-brand-600 text-white py-12">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, i) => (

@@ -31,7 +31,7 @@ export default function TestimonialsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((t, i) => (
             <div key={i} className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100 flex flex-col items-center text-center relative">
-              <div className="absolute -top-6 bg-indigo-600 text-white p-4 rounded-2xl shadow-lg shadow-indigo-100">
+              <div className="absolute -top-6 bg-brand-600 text-white p-4 rounded-2xl shadow-lg shadow-brand-100">
                 <FaQuoteLeft />
               </div>
               
@@ -47,7 +47,7 @@ export default function TestimonialsSection() {
                 <FaUserCircle size={40} className="text-gray-200" />
                 <div className="text-left">
                   <h4 className="font-bold text-gray-900 leading-none mb-1 uppercase tracking-tight">{t.name}</h4>
-                  <p className="text-xs font-medium text-indigo-600">{t.role}</p>
+                  <p className="text-xs font-medium text-brand-600">{t.role}</p>
                 </div>
               </div>
             </div>

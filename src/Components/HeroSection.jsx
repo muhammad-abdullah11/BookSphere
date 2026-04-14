@@ -12,11 +12,11 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
-                        <span className="inline-flex items-center gap-2 text-indigo-600 bg-indigo-50 px-4 py-2 rounded-full text-xs font-bold mb-6">
+                        <span className="inline-flex items-center gap-2 text-brand-600 bg-brand-50 px-4 py-2 rounded-full text-xs font-bold mb-6">
                             <FaBookOpen /> Your gateway to endless stories
                         </span>
                         <h1 className="text-5xl md:text-7xl font-black text-gray-900 leading-[1.1] mb-6">
-                            Escape Into <br /> <span className="text-indigo-600">Another World</span>
+                            Escape Into <br /> <span className="text-brand-600">Another World</span>
                         </h1>
                         <p className="text-lg text-gray-500 mb-10 max-w-lg leading-relaxed">
                             Discover a vast collection of books and exclusive reader merch. From timeless classics to modern bestsellers, your next adventure starts here.
@@ -25,7 +25,7 @@ export default function HeroSection() {
                         <div className="flex flex-col sm:flex-row items-center gap-4">
                             <Link 
                                 to="/books" 
-                                className="w-full sm:w-auto bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100"
+                                className="w-full sm:w-auto bg-brand-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-brand-700 transition-all shadow-xl shadow-brand-100"
                             >
                                 Browse Books <FaArrowRight size={14} />
                             </Link>
@@ -46,7 +46,7 @@ export default function HeroSection() {
                         transition={{ duration: 0.8 }}
                         className="relative z-10"
                     >
-                        <div className="w-full aspect-square bg-indigo-600 rounded-[3rem] overflow-hidden flex items-center justify-center p-12">
+                        <div className="w-full aspect-square bg-brand-600 rounded-[3rem] overflow-hidden flex items-center justify-center p-12">
                             <FaBookOpen className="text-white text-[10rem] opacity-20 absolute" />
                             <img 
                                 src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=2074&auto=format&fit=crop" 
@@ -56,8 +56,8 @@ export default function HeroSection() {
                         </div>
                     </motion.div>
                     
-                    <div className="absolute -top-6 -right-6 w-32 h-32 bg-indigo-50 rounded-full blur-3xl opacity-50" />
-                    <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-indigo-100 rounded-full blur-3xl opacity-50" />
+                    <div className="absolute -top-6 -right-6 w-32 h-32 bg-brand-50 rounded-full blur-3xl opacity-50" />
+                    <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-brand-100 rounded-full blur-3xl opacity-50" />
                 </div>
             </div>
         </section>
