@@ -1,85 +1,65 @@
-import { FaBookOpen, FaSearch, FaStar, FaUsers, FaBook } from "react-icons/fa"
+import { FaArrowRight, FaBookOpen } from "react-icons/fa"
+import { Link } from "react-router-dom"
+import { motion } from "framer-motion"
 
-const stats = [
-    { icon: FaBook, num: "50,000+", label: "Books" },
-    { icon: FaUsers, num: "120,000+", label: "Members" },
-    { icon: FaStar, num: "4.9★", label: "Rating" },
-]
-
-const tags = ["Fiction", "Science", "History", "Technology", "Biography", "Philosophy", "Comics"]
-
-export default function Hero() {
+export default function HeroSection() {
     return (
-        <main>
-            <section className="bg-white border-b border-gray-300">
-                <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <span className="inline-flex items-center gap-2 border border-gray-300 rounded-full px-4 py-1 text-xs font-semibold text-black mb-6">
-                            <FaBookOpen size={12} /> welcome to BookSphere
+        <section className="bg-white min-h-[80vh] flex items-center">
+            <div className="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
+                <div className="flex-1 text-center md:text-left">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <span className="inline-flex items-center gap-2 text-indigo-600 bg-indigo-50 px-4 py-2 rounded-full text-xs font-bold mb-6">
+                            <FaBookOpen /> Your gateway to endless stories
                         </span>
-                        <h1 className="text-4xl md:text-5xl font-bold text-black leading-tight mb-5">
-                            discover, borrow & enjoy books anytime
+                        <h1 className="text-5xl md:text-7xl font-black text-gray-900 leading-[1.1] mb-6">
+                            Escape Into <br /> <span className="text-indigo-600">Another World</span>
                         </h1>
-                        <p className="text-black text-base leading-relaxed mb-8 max-w-md">
-                            explore thousands of titles across every genre. your personal digital library is just one click away — free, fast, and always open.
+                        <p className="text-lg text-gray-500 mb-10 max-w-lg leading-relaxed">
+                            Discover a vast collection of books and exclusive reader merch. From timeless classics to modern bestsellers, your next adventure starts here.
                         </p>
 
-                        <div className="flex border border-gray-300 rounded-full overflow-hidden mb-8 max-w-md">
-                            <span className="flex items-center pl-4 text-black">
-                                <FaSearch size={14} />
-                            </span>
-                            <input
-                                type="search"
-                                placeholder="search by title, author or ISBN..."
-                                className="flex-1 px-3 py-3 text-sm text-black outline-none bg-white"
-                            />
-                            <button className="bg-black text-white text-sm font-semibold px-6 py-3 rounded-full">
-                                search
-                            </button>
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
+                            <Link 
+                                to="/books" 
+                                className="w-full sm:w-auto bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100"
+                            >
+                                Browse Books <FaArrowRight size={14} />
+                            </Link>
+                            <Link 
+                                to="/shop" 
+                                className="w-full sm:w-auto bg-white border border-gray-200 text-gray-900 px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-gray-50 transition-all"
+                            >
+                                Visit Shop
+                            </Link>
                         </div>
-
-                        <div className="flex flex-wrap gap-2 mb-10">
-                            {tags.map(t => (
-                                <span key={t} className="border border-gray-300 rounded-full px-3 py-1 text-xs text-black">{t}</span>
-                            ))}
-                        </div>
-
-                        <div className="flex flex-wrap gap-8">
-                            {stats.map(({ icon: Icon, num, label }) => (
-                                <div key={label} className="flex items-center gap-2">
-                                    <Icon size={16} className="text-black" />
-                                    <div>
-                                        <p className="text-black font-bold text-lg leading-none">{num}</p>
-                                        <p className="text-black text-xs mt-1">{label}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="relative">
-                        <div className="border-2 border-gray-300 rounded-2xl overflow-hidden">
-                            <img
-                                src="https://play-lh.googleusercontent.com/QsMMDVoziY8JfvnhmxMgEnYK6UMxMRWI-BESoJMNeaKSd4HGNtuNQvfePmxyax-2mQ=w3840-h2160-rw"
-                                alt="BookSphere digital library app preview"
-                                className="w-full object-cover"
-                            />
-                        </div>
-                        <div className="absolute -bottom-5 -left-5 bg-white border border-gray-300 rounded-xl px-4 py-3 shadow-sm">
-                            <p className="text-black text-xs font-semibold mb-1">new arrival</p>
-                            <p className="text-black text-sm font-bold">Atomic Habits</p>
-                            <p className="text-black text-xs">James Clear</p>
-                        </div>
-                        <div className="absolute -top-4 -right-4 bg-white border border-gray-300 rounded-xl px-4 py-3 shadow-sm">
-                            <p className="text-black text-xs font-semibold mb-1">currently reading</p>
-                            <div className="flex items-center gap-1">
-                                {[1, 2, 3, 4, 5].map(s => <FaStar key={s} size={10} className="text-black" />)}
-                            </div>
-                            <p className="text-black text-xs mt-1">4.9 / 5 rating</p>
-                        </div>
-                    </div>
+                    </motion.div>
                 </div>
-            </section>
-        </main>
+
+                <div className="flex-1 relative">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8 }}
+                        className="relative z-10"
+                    >
+                        <div className="w-full aspect-square bg-indigo-600 rounded-[3rem] overflow-hidden flex items-center justify-center p-12">
+                            <FaBookOpen className="text-white text-[10rem] opacity-20 absolute" />
+                            <img 
+                                src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=2074&auto=format&fit=crop" 
+                                alt="Books"
+                                className="w-full h-full object-cover rounded-2xl shadow-2xl rotate-3"
+                            />
+                        </div>
+                    </motion.div>
+                    
+                    <div className="absolute -top-6 -right-6 w-32 h-32 bg-indigo-50 rounded-full blur-3xl opacity-50" />
+                    <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-indigo-100 rounded-full blur-3xl opacity-50" />
+                </div>
+            </div>
+        </section>
     )
 }
